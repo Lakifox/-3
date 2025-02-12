@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перевірка числа на простоту</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        input {
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Перевірка числа на простоту</h1>
+    <p>Введіть число:</p>
+    <input type="number" id="numberInput" placeholder="Введіть число">
+    <button onclick="checkPrime()">Перевірити</button>
+    <div class="result" id="result"></div>
+
+    <script>
+       
+        function isPrime(n) {
+            if (n <= 1) return false; 
+            if (n <= 3) return true;  
+            if (n % 2 === 0 || n % 3 === 0) return false; 
+
+            
+            for (let i = 5; i * i <= n; i += 6) {
+                if (n % i === 0 || n % (i + 2) === 0) return false;
+            }
+            return true;
+        }
+
+        
+        function checkPrime() {
+            const input = document.getElementById("numberInput").value;
+            const number = parseInt(input, 10);
+            const resultElement = document.getElementById("result");
+
+            if (isNaN(number)) {
+                resultElement.textContent = "Будь ласка, введіть коректне число.";
+                return;
+            }
+
+            if (isPrime(number)) {
+                resultElement.textContent = `${number} є простим числом.`;
+            } else {
+                resultElement.textContent = `${number} не є простим числом.`;
+            }
+        }
+    </script>
+</body>
+
+</html>
